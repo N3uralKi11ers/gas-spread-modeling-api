@@ -35,9 +35,23 @@ class Field(BaseModel):
 class Person(BaseModel):
     v: float
 
+    class Config:
+        from_attributes = True
+
+class Marker(BaseModel):
+    place: Point
+    x: float
+    y: float
+
+    class Config:
+        from_attributes = True
+
 class Init(BaseModel):
     person: Person
-    field: Field
+    markers: List[Marker]
+
+    class Config:
+        from_attributes = True
 
 
 
