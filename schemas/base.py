@@ -16,7 +16,7 @@ class GasType(Enum):
 
 class Gas(BaseModel):
     pos: Pos
-    gas: GasType
+    gas_type: GasType
 
     def velocity(self) -> float:
         pass
