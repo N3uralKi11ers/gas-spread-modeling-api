@@ -1,16 +1,18 @@
-from pydantic import BaseModel
+import json
+from PIL import Image
+from io import BytesIO
+from pydantic import BaseModel, validator
 from typing import List, Optional
 from enum import Enum
+from fastapi import FastAPI, Form, UploadFile, File
 
 class Pos(BaseModel):
     x: int
     y: int
-    class Config:
-        from_attributes = True
 
 class GasType(Enum):
-
     test_gas = 0
+
 
 class Gas(BaseModel):
     pos: Pos
@@ -19,19 +21,13 @@ class Gas(BaseModel):
     def velocity(self) -> float:
         pass
 
-    class Config:
-        from_attributes = True
 
 class Person(BaseModel):
     pos: Pos
     velocity: float = 1.0
-    class Config:
-        from_attributes = True
 
 class Destination(BaseModel):
     position: Pos
-    class Config:
-        from_attributes = True
 
 class BaseElement(Enum):
     free = 0
@@ -41,17 +37,14 @@ class BaseElement(Enum):
 
 class EvacuationMap(BaseModel):
     ev_map: List[List[BaseElement]] 
-    class Config:
-        from_attributes = True
 
 class EvacuationMapTimeSeries(BaseModel):
     maps_series: List[EvacuationMap]
-    class Config:
-        from_attributes = True
 
 class BaseSettings(BaseModel):
-    person: Person
-    gases: List[Gas]
+    person: Person = Form(...)
+    gases: List[Gas] = Form(...)
+    image: Optional[bytes] = None
+
     class Config:
         from_attributes = True
-
