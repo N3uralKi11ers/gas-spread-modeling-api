@@ -1,16 +1,13 @@
 import os
-import shemas
+from schemas import base as base_entity
+from api.routes import router
 
 from fastapi import FastAPI, Request, Response, status, UploadFile, File
+from fastapi.exceptions import HTTPException
 
 app = FastAPI()
 
-@app.get("/")
-async def test():
-    return {"Hello": "World"}
+app.include_router(router)
 
-@app.post("/init/")
-async def create_init(init: shemas.Init, image: UploadFile = File(...)):
-    # Обработка запроса
-    return {"init": init, "image_name": image.filename}
-
+if __name__ == '__main__':
+    pass
