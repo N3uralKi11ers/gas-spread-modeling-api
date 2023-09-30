@@ -5,6 +5,10 @@ from fastapi import FastAPI, Request, Response, status, UploadFile, File
 
 app = FastAPI()
 
+@app.get("/")
+async def test():
+    return {"Hello": "World"}
+
 @app.post("/init/")
 async def create_init(init: shemas.Init, image: UploadFile = File(...)):
     # Обработка запроса

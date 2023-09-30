@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from fastapi import UploadFile
 from enum import Enum
-
+from typing import List
 
 class GasType(Enum):
     test_gas = 0
@@ -11,7 +11,7 @@ class Gas(BaseModel):
     v: float
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class PointType(Enum):
     people = 0
@@ -21,16 +21,16 @@ class PointType(Enum):
 
 class Point(BaseModel):
     point: PointType
-    gases: list(Gas)
+    gases: List[Gas]
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class Field(BaseModel):
-    field: list(list(Point))
+    field: List[List[Point]]
     
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class Person(BaseModel):
     v: float
