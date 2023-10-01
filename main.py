@@ -8,18 +8,18 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-origins = [
-    "http://localhost:8000",
-    "http://localhost"
-]
+# origins = [
+#     "http://localhost:8000",
+#     "http://localhost:5173"
+# ]
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origin=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"]
-)
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origin=origins,
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     allow_headers=["*"]
+# )
 
 app.include_router(router)
 

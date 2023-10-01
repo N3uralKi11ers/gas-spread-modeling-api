@@ -26,6 +26,6 @@ async def start_solve(data: BaseSettings):
 async def post_photo(file: UploadFile = File(...)):
     content = await file.read()
     ev_map = process_photo_in_evacuation_map(content)
-    # ev_map.pprint()
+    ev_map.pprint()
     return ev_map
 
