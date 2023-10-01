@@ -12,6 +12,10 @@ def convert_np_array_to_evacuation_map(np_array: np.ndarray) -> EvacuationMap:
         ev_map.append(ev_map_row)
     return EvacuationMap(ev_map=ev_map)
 
+def resize_image(img):
+    pass
+
+
 def process_photo_in_evacuation_map(file: bytes) -> EvacuationMap:
     nparr = np.frombuffer(file, np.uint8)
     image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
@@ -25,6 +29,5 @@ def process_photo_in_evacuation_map(file: bytes) -> EvacuationMap:
     result_matrix = np.zeros_like(min_values, dtype=np.uint8)
 
     result_matrix[np.logical_or(max_values <= 25, (max_values <= 110) & (channel_diff < 20))] = 1
-    print(result_matrix)
 
     return convert_np_array_to_evacuation_map(result_matrix)
