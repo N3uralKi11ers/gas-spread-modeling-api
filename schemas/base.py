@@ -21,7 +21,6 @@ class Gas(BaseModel):
     def velocity(self) -> float:
         pass
 
-
 class Person(BaseModel):
     pos: Pos
     velocity: float = 1.0
@@ -36,15 +35,26 @@ class BaseElement(Enum):
     gas = 3
 
 class EvacuationMap(BaseModel):
-    ev_map: List[List[BaseElement]] 
+    ev_map: List[List[BaseElement]]
+    def pprint(self):
+        for i in range(len(self.ev_map)):
+            row = ""
+            for j in range(len(self.ev_map[i])):
+                row += f"{self.ev_map[i][j].value} "
+            print(row)
 
 class EvacuationMapTimeSeries(BaseModel):
     maps_series: List[EvacuationMap]
 
+    def pprint(self):
+        for t in range(len(self.maps_series)):
+            print(t)
+            self.maps_series[t].pprint()
+
 class BaseSettings(BaseModel):
     person: Person = Form(...)
     gases: List[Gas] = Form(...)
-    image: Optional[bytes] = None
+    evacuation_map: EvacuationMap = Form(...)
 
     class Config:
         from_attributes = True
