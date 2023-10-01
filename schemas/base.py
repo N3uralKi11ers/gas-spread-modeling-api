@@ -34,6 +34,9 @@ class Person(BaseModel):
 
 class Destination(BaseModel):
     position: Pos
+    
+class Route(BaseModel):
+    points: List[Pos]
 
 class BaseElement(Enum):
     free = 0
